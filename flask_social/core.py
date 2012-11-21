@@ -122,11 +122,9 @@ class Social(object):
         for key, config in app.config.items():
             if not key.startswith('SOCIAL_') or key in default_config:
                 continue
-
             provider_id = key.lower().replace('social_', '')
             if "module" not in config:
-                config["module"] = "flask_social.providers."+ provider_id
-
+                continue
             try:
                 module = import_module(config["module"] )
                 module.config = RecursiveDictionary(module.config)
