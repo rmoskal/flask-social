@@ -161,7 +161,7 @@ def login_handler(response, provider, query):
 
     if connection:
         after_this_request(_commit)
-        user = connection.user
+        user = _security.datastore.find_user(id=connection.user_id)
         login_user(user)
         key = _social.post_oauth_login_session_key
         redirect_url = session.pop(key, get_post_login_redirect())
